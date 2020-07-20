@@ -1,71 +1,77 @@
 console.log("student client running!");
 
+var socket = io("/student");
+
 const positive = document.getElementById('student_positive');
 positive.addEventListener('click', function(e) {
 	console.log("positive click!");
 
-	fetch('/student_positive', {method: 'POST'})
-		.then(function(response) {
-			if (response.ok) {
-				console.log("positive acknowledged!");
-				return;
-			}
-			throw new Error('Positive Request failed.');
-		})
-		.catch(function(error) {
-			console.log(error);
-		});
+	socket.emit('feedback', 'positive');
 });
+
 const repeat = document.getElementById('student_repeat');
 repeat.addEventListener('click', function(e) {
 	console.log("repeat click!");
 
-	fetch('/student_repeat', {method: 'POST'})
-		.then(function(response) {
-			if (response.ok) {
-				console.log("repeat acknowledged!");
-				return;
-			}
-			throw new Error('Repeat Request failed.');
-		})
-		.catch(function(error) {
-			console.log(error);
-		});
+	socket.emit('feedback', 'repeat');
 });
+
 const negative = document.getElementById('student_negative');
 negative.addEventListener('click', function(e) {
 	console.log("negative click!");
 
-	fetch('/student_negative', {method: 'POST'})
-		.then(function(response) {
-			if (response.ok) {
-				console.log("negative acknowledged!");
-				return;
-			}
-			throw new Error('negative Request failed.');
-		})
-		.catch(function(error) {
-			console.log(error);
-		});
+	socket.emit('feedback', 'negative');
 });
+
 const question = document.getElementById('student_question');
 question.addEventListener('click', function(e) {
 	console.log("question click!");
 
-	fetch('/student_question', {method: 'POST'})
-		.then(function(response) {
-			if (response.ok) {
-				console.log("question acknowledged!");
-				return;
-			}
-			throw new Error('question Request failed.');
-		})
-		.catch(function(error) {
-			console.log(error);
-		});
+	socket.emit('question');
 });
 
+const yes_button = document.getElementById('survey_yes');
+yes_button.addEventListener('click', function(e) {
+	console.log("survey response: yes");
 
-addEventListener('beforeunload', function (e) { 
-    fetch('/student_exit', {method: 'POST'});
-}); 
+	socket.emit('survey response', "yes");
+	endSurvey();
+});
+
+const no_button = document.getElementById('survey_no');
+no_button.addEventListener('click', function(e) {
+	console.log("survey response: no");
+
+	socket.emit('survey response', "no");
+	endSurvey();
+});
+
+socket.on('start survey', function(duration) {
+	startSurvey(duration);
+});
+
+socket.on('end survey', function() {
+	endSurvey();
+});
+
+function startSurvey(duration) {
+	//TODO: sound notification of survey start, open survey options. show countdown?
+	console.log("survey started! " + duration + "ms to respond!");
+}
+
+function endSurvey() {
+	//TODO: close survey options
+	console.log("survey completed and/or responded to!");
+}
+
+var muteBox = document.getElementById("lecture_audio");
+
+muteBox.addEventListener('change', function() {
+    muteLecture(!this.checked);
+});
+
+function muteLecture(mute) {
+	//TODO: handle lecture mute audio w/ filters
+	console.log("Lecture audio not yet implemented");
+	console.log("Lecture audio muted? " + mute);
+}

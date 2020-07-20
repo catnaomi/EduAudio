@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<input type="checkbox" id="lecture_audio">mute/unmute</toggle>
 <button id="student_positive">"I understand!"</button>
 <br/>
 <button id="student_repeat">"Can you repeat that?"</button>
@@ -7,5 +8,10 @@
 <button id="student_negative">"I don't understand."</button>
 <br/>
 <button id="student_question">"I have a question."</button>
-<script type="text/javascript" src="/scripts/client-student.js"></script>
+<div id="survey_input">
+	<button id="survey_yes">yes</button>
+	<button id="survey_no">no</button>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./scripts/client-student.js"></script>
 </html>
