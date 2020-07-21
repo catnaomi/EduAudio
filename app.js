@@ -110,21 +110,29 @@ async function handleSurvey(requester, duration, callback) {
 	console.log("Survey of duration " + duration + "ms started at " + new Date());
 
 
-	currentSurveyResults = {};
+	currentSurveyResults = {
+		count: 0,
+		yes: 0,
+		no: 0,
+		noresponse: 0
+	};
 	isSurveyInProgress = true;
 
 	students.clients((error, clients) => {
 		if (error) throw error;
 		clients.forEach(client => {
 			currentSurveyResults[client] = "no response";
+			currentSurveyResults.count++;
 		});
 	});
+
 	students.emit('start survey', duration);
 
 	await setTimeout(() => {
 		console.log("Survey completed at " + new Date());
 		isSurveyInProgress = false;
 		students.emit('end survey');
+		currentSurveyResults.noresponse = currentSurveyResults.count - (currentSurveyResults.yes + currentSurveyResults.no);
 		callback(currentSurveyResults);
 	}, duration);
 }
@@ -133,5 +141,11 @@ function handleSurveyResponse(respondent, response) {
 	if (isSurveyInProgress) {
 		console.log("Student " + respondent + " responded with " + response + " to survey");
 		currentSurveyResults[respondent] = response;
+		if (response == "yes") {
+			currentSurveyResults.yes++;
+		}
+		else if (response == "no") {
+			currentSurveyResults.no++;
+		}
 	}
 }

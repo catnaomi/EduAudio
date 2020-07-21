@@ -1,0 +1,102 @@
+body {
+	display: block;
+}
+
+.inner_border {
+	width: 360px;
+	height: 640px;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	background-color: #DDDDDD;
+}
+
+.outer_border {
+	padding: 2em 2em 2em 2em;
+	border-radius: 2em;
+	border: 1px solid black;
+	display: block;
+	background-color: #333333;
+	width: min-content;
+}
+.vertical_bar {
+	flex: 0.5;
+	display: block;
+	padding: 0.5em 0.5em;
+}
+.vertical_bar button {
+	width: 50px;
+	height: 50px;
+	font-size: 1.5em;
+	text-align: center;
+	padding: 0;
+	background: white;
+	border-radius: 50px;
+}
+
+.button_section {
+	flex: 2;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.button_section button {
+	width: 200px;
+	height: 150px;
+	font-size: 1em;
+	line-height: 2em;
+	background-color: grey;
+	color: white;
+	font-weight: bold;
+	border-radius: 1em;
+}
+
+.button_section button .back {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	opacity: 0.25;
+	font-size: 10em;
+	top: -100%;
+}
+
+.button_section button .front {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	z-index: 5;
+}
+#negative {
+	background-color: purple;
+}
+
+#negative .front {
+	padding: 1.5em 0;
+}
+
+#negative .back {
+	top: -140px;
+}
+#positive {
+	background-color: green;
+}
+#positive .front {
+	padding: 2.5em 0;
+}
+#positive .back {
+	top: -170px;
+}
+#question {
+	background-color: teal;
+}
+
+#question .front {
+	padding: 3.5em 0;
+}
+#question .back {
+	top: -205px;
+}
