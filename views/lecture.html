@@ -11,14 +11,38 @@
 
 <audio id="audio_survey_positive" src="/audio/positive2.wav"></audio>
 <audio id="audio_survey_negative" src="/audio/negative2.wav"></audio>
-
-<input id="master_gain_slider" type="range" value="1" min="0" max="2"step="0.01"></input>
-<div id="master_gain_display">1</div>
-<div id="sound_test">
-	<button id="test_confusion">test: confusion</button>
-</div>
-<button id="get_all">Force Request Feedback</button>
-<button id="survey">Start Survey</button>
+<table>
+	<th>
+		Lecturer "View"
+	</th>
+	<tr>
+		<th>
+			Volume
+		</th>
+		<td>
+			<input id="master_gain_slider" type="range" value="1" min="0" max="2"step="0.01"></input>
+		</td>
+		<td>
+			<div id="master_gain_display">1</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button id="get_all">Force Request Feedback</button>
+		</td>
+		<td id="feedback_time">
+			15 seconds until next feedback request.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<button id="survey">Start Survey</button>
+		</td>
+		<td>
+			<button id="sound_test">Play Test Sound</button>
+		</td>
+	</tr>
+</table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/scripts/client-lecture.js"></script>

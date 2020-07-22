@@ -7,9 +7,17 @@ var LOOP_INTERVAL = 15000; // 15 seconds
 var FEEDBACK_DURATION = 60000; // 1 minute
 var SURVEY_DURATION = 30000; // 30 seconds
 
+var debug_fb = 15;
+
 setInterval(() => {
 	requestFeedback();
+	debug_fb = 15;
 }, 15000);
+
+setInterval(() => {
+	debug_fb--;
+	document.getElementById("feedback_time").innerHTML = debug_fb + " seconds until next feedback request.";
+}, 1000);
 
 // feedback handling
 
@@ -144,9 +152,6 @@ sound_lowengage.track.connect(tempGain);
 var sound_survey = createSound("audio_survey", ac);
 sound_repeat.track.connect(tempGain);
 
-var sound_lowengage = createSound("audio_lowengage", ac);
-sound_lowengage.track.connect(tempGain);
-
 var sound_survey_positive = createSound("audio_survey_positive", ac);
 sound_survey_positive.track.connect(surveyPositiveDelay);
 surveyPositivePanner.pan = -1;
@@ -174,6 +179,7 @@ function queueFunct() {
 	}
 }
 
+// queue notification sound
 function playNotification(sound, isPriority, g) {
 	if (!notifPlaying) {
 		tempGain.gain.value = g;
@@ -198,6 +204,8 @@ function playNotification(sound, isPriority, g) {
 	return sound;
 }
 
+
+// parses feedback results
 function handleFeedbackAudio(feedbackResults) {
 	// convert feedback results into audio.
 
@@ -261,29 +269,31 @@ function handleSurveyAudio(surveyResults) {
 		last = playNotification(sound_lowengage, false, 1);
 	}
 
-	var responseDiff = (surveyResults.yes - surveyResults.no) / (surveyResults.count - surveyResults.noresponse); // difference between yes and no answers
 
-	if (surveyResults.no < surveyResults.yes) {
-		surveyPositiveDelay.delayTime = 500;
-		playNotification(sound_survey_positive, false, 1 + responseDiff);
+	if ((surveyResults.yes + surveyResults.no) > 0) {
+		// play the more popular response first, then delay the second to make sounds distinct.
 
-		surveyNegativeDelay.delayTime = 2500;
-		playNotification(sound_survey_negative, false, 1 - responseDiff);
+		var responseDiff = (surveyResults.yes - surveyResults.no) / (surveyResults.count - surveyResults.noresponse); // difference between yes and no answers
+
+		if (surveyResults.no < surveyResults.yes) {
+			surveyPositiveDelay.delayTime = 500;
+			playNotification(sound_survey_positive, false, 1 + responseDiff);
+
+			surveyNegativeDelay.delayTime = 2500;
+			playNotification(sound_survey_negative, false, 1 - responseDiff);
+		}
+		else {
+			surveyNegativeDelay.delayTime = 500;
+			playNotification(sound_survey_negative, false, 1 - responseDiff);
+
+			surveyPositiveDelay.delayTime = 2500;
+			playNotification(sound_survey_positive, false, 1 + responseDiff);
+		}
 	}
-	else {
-		surveyNegativeDelay.delayTime = 500;
-		playNotification(sound_survey_negative, false, 1 - responseDiff);
-
-		surveyPositiveDelay.delayTime = 2500;
-		playNotification(sound_survey_positive, false, 1 + responseDiff);
-	}
-
-	/*
-	surveyPositiveGain = 1 + responseDiff;
-	surveyNegativeGain = 1 - responseDiff;
-
-	// TODO: make more distinct
-	sound_survey_positive.element.play();
-	sound_survey_negative.element.play();
-	*/
 }
+
+// play test sound
+
+document.getElementById('sound_test').addEventListener('click', function(e) {
+	playNotification(sound_positive, true, 1);
+});

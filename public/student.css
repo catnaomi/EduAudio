@@ -2,18 +2,30 @@ body {
 	display: block;
 }
 
+#lecture_audio {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border-radius: 16px;
+	font-size: 1em;
+}
+
+.inner_container {
+	height: 640px;
+	overflow: hidden;
+}
 .inner_border {
 	width: 360px;
 	height: 640px;
 	border: 1px solid black;
+	background-color: #BBBBBB;
 	display: flex;
 	flex-direction: column;
-	background-color: #DDDDDD;
 }
 
 .outer_border {
-	padding: 2em 2em 2em 2em;
-	border-radius: 2em;
+	padding: 32px 32px 32px 32px;
+	border-radius: 32px;
 	border: 1px solid black;
 	display: block;
 	background-color: #333333;
@@ -22,81 +34,129 @@ body {
 .vertical_bar {
 	flex: 0.5;
 	display: block;
-	padding: 0.5em 0.5em;
-}
-.vertical_bar button {
-	width: 50px;
-	height: 50px;
-	font-size: 1.5em;
-	text-align: center;
-	padding: 0;
-	background: white;
-	border-radius: 50px;
 }
 
-.button_section {
-	flex: 2;
-	text-align: center;
-	justify-content: center;
-	align-items: center;
+#master_gain_slider {
+	display: inline-block;
+	width: 50%;
+	background-color: black;
 }
 
-.button_section button {
-	width: 200px;
-	height: 150px;
-	font-size: 1em;
-	line-height: 2em;
-	background-color: grey;
+.inner_border button {
+	flex: 1;
+	margin: 10px;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.inner_border label {
 	color: white;
+	display: inline;
 	font-weight: bold;
-	border-radius: 1em;
+	font-size: 1.25em;
+	line-height: 110px;
 }
 
-.button_section button .back {
+.inner_border button .back {
+	display: block;
 	position: relative;
-	display: inline-block;
-	width: 100%;
-	height: 100%;
+	line-height: 105px;
+	top: -110px;
+	z-index: 1;
+	color: white;
 	opacity: 0.25;
-	font-size: 10em;
-	top: -100%;
+	font-size: 8em;
+	font-weight: bold;
 }
 
-.button_section button .front {
-	position: relative;
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	z-index: 5;
-}
-#negative {
-	background-color: purple;
+#student_positive {
+	background-color: #A95AA1;
 }
 
-#negative .front {
-	padding: 1.5em 0;
+#student_repeat {
+	background-color: #0F2080;
 }
 
-#negative .back {
-	top: -140px;
-}
-#positive {
-	background-color: green;
-}
-#positive .front {
-	padding: 2.5em 0;
-}
-#positive .back {
-	top: -170px;
-}
-#question {
+#student_negative {
 	background-color: teal;
 }
 
-#question .front {
-	padding: 3.5em 0;
+#student_question {
+	background-color: #F5793A;
 }
-#question .back {
-	top: -205px;
+
+#survey_input {
+	position: relative;
+	height: 120px;
+	top: -400px;
+	transition: left 1s;
+	background-color: #555555;
+	border: 4px #888888 solid;
+	border-radius: 10px;
+	z-index: 3;
+}
+
+#survey_input p {
+	margin: 0;
+	padding-top: 10px;
+	font-size: 1.25em;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	line-height: 1.25em;
+	font-family: arial;
+}
+#survey_input div {
+	display: flex;
+	justify-content: center;
+}
+#survey_input button {
+	display: inline-block;
+	text-align: center;
+	flex: 1;
+	margin: 10px 15px 0 15px;
+	width: 100px;
+	height: 50px;
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 1.25em;
+}
+
+#survey_input.open {
+	left: 0;
+}
+
+#survey_input.closed {
+	left: 360px;
+}
+#survey_yes {
+	background-color: teal;
+}
+
+#survey_no {
+	background-color: purple;
+}
+
+#notification {
+	z-index: 3;
+	height: 48px;
+	position: relative;
+	bottom: 176px;
+	line-height: 48px;
+	font-size: 1em;
+	text-align: center;
+	color: white;
+	background-color: purple;
+	font-family: arial;
+	transition: bottom 1s;
+	border-top: 2px solid #A95AA1;
+}
+
+#notification.open {
+	bottom: 176px;
+}
+
+#notification.closed {
+	bottom: 100px;
 }

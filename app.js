@@ -45,7 +45,7 @@ students.on('connection', socket => {
 });
 
 app.get('/student', function(req, res) {
-	res.sendFile(__dirname + '/views/student.html');
+	res.sendFile(__dirname + '/views/student2.html');
 	console.log("A student has been sent student page.");
 });
 

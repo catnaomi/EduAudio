@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="student.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<audio id="audio_survey" src="/audio/survey.wav"></audio>
+		<audio id="audio_lecture" src="/audio/lectureaudio.wav"></audio>
+	</head>
+	<body>
+		<div class="outer_border">
+			<div class="inner_container">
+				<div class="inner_border">
+					<div class="vertical_bar">
+						<button id="lecture_audio">🔊</button>
+						<input id="master_gain_slider" type="range" value="1" min="0" max="2"step="0.01"></input>
+					</div>
+					<button id="student_positive"><label for="student_positive">"I understand!"</label><div class="back">O</div></button>
+					<button id="student_repeat"><label for="student_repeat">"Can you repeat that?"</label><div class="back">...</div></button>
+					<button id="student_negative"><label for="student_negative">"I don't understand."</label><div class="back">X</div></button>
+					<button id="student_question"><label for="student_question">"I have a question."</label><div class="back">?</div></button>
+					<div class="vertical_bar">					
+					</div>				
+				</div>
+				<div id="survey_input" class="closed">
+					<p>Survey in progress!</p>
+					<div>
+						<button id="survey_yes">yes</button>
+						<button id="survey_no">no</button>
+					</div>
+				</div>
+				<div id="notification" class="closed">
+					Notifications go here!
+				</div>
+			</div>
+		</div>
+		<input id="filter_toggle" type="checkbox">Turn off filter.</input>
+	</body>
+			<script src="./scripts/client-student.js"></script>
+</html>
