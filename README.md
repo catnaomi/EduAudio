@@ -24,5 +24,5 @@ http://localhost:8080/student
 ```
 And lecturer view at:
 ```
-http://localhost:8080/lecturer
+http://localhost:8080/lecture
 ```
