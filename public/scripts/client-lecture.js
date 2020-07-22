@@ -8,6 +8,7 @@ var FEEDBACK_DURATION = 60000; // 1 minute
 var SURVEY_DURATION = 30000; // 30 seconds
 
 var debug_fb = 15;
+var debug_survey = 0;
 
 setInterval(() => {
 	requestFeedback();
@@ -17,6 +18,13 @@ setInterval(() => {
 setInterval(() => {
 	debug_fb--;
 	document.getElementById("feedback_time").innerHTML = debug_fb + " seconds until next feedback request.";
+	if (debug_sv >= 0) {
+		document.getElementById("survey_time").innerHTML = debug_sv + " seconds until end of survey.";
+		debug_sv--;
+	}
+	else {
+		document.getElementById("survey_time").innerHTML = "";
+	}
 }, 1000);
 
 // feedback handling
@@ -88,6 +96,7 @@ function startSurvey() {
 		console.log("survey complete!");
 		handleSurveyAudio(surveyResults);
 	});
+	debug_sv = 30;
 }
 
 // audio setup
