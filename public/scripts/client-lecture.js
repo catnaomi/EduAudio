@@ -8,7 +8,7 @@ var FEEDBACK_DURATION = 60000; // 1 minute
 var SURVEY_DURATION = 30000; // 30 seconds
 
 var debug_fb = 15;
-var debug_survey = 0;
+var debug_sv = 0;
 
 setInterval(() => {
 	requestFeedback();

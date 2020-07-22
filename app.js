@@ -1,14 +1,5 @@
 // setup
 
-/*
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-var express = require('express');
-var app = express();
-
-app.use(express.static('public'));
-
-*/
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
